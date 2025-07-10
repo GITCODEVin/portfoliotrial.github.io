@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula Creations | Digital Art Portfolio</title>
+    <style>
+        :root {
+            --deep-space: #0a0a1a;
+            --nebula-purple: #6a3dad;
+            --starlight-blue: #4d7cff;
+            --cosmic-pink: #d83dff;
+            --galaxy-border: 1px solid rgba(106, 61, 173, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--deep-space);
+            color: white;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(77, 124, 255, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(216, 61, 255, 0.15) 0%, transparent 20%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            padding: 30px 0;
+            border-bottom: var(--galaxy-border);
+            background: rgba(10, 10, 26, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .logo h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--starlight-blue), var(--cosmic-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--nebula-purple), transparent 70%);
+            filter: blur(50px);
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--starlight-blue), transparent 70%);
+            filter: blur(50px);
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, white, var(--starlight-blue));
+            -webkit-background-clclip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 600px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--nebula-purple), var(--starlight-blue));
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(106, 61, 173, 0.3);
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--starlight-blue), var(--cosmic-pink));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cta-button:hover::after {
+            opacity: 1;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h3 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, var(--starlight-blue), var(--cosmic-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .section-title p {
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background: rgba(77, 124, 255, 0.1);
+            color: var(--starlight-blue);
+            border: var(--galaxy-border);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(45deg, var(--nebula-purple), var(--starlight-blue));
+            color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .artwork-card {
+            background: rgba(20, 20, 40, 0.5);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: var(--galaxy-border);
+            position: relative;
+        }
+
+        .artwork-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(106, 61, 173, 0.2);
+        }
+
+        .artwork-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .artwork-info {
+            padding: 20px;
+        }
+
+        .artwork-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .artwork-category {
+            display: inline-block;
+            padding: 5px 10px;
+            background: rgba(106, 61, 173, 0.2);
+            color: var(--starlight-blue);
+            border-radius: 5px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        .artwork-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background: transparent;
+            color: var(--cosmic-pink);
+            border: 1px solid var(--cosmic-pink);
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn:hover {
+            background: var(--cosmic-pink);
+            color: white;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 26, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: rgba(30, 30, 60, 0.9);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            padding: 30px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: var(--galaxy-border);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .modal-category {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(106, 61, 173, 0.3);
+            color: var(--starlight-blue);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .modal-desc {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-date {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 0;
+            text-align: center;
+            background: rgba(10, 10, 26, 0.8);
+            border-top: var(--galaxy-border);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(77, 124, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--starlight-blue);
+            transform: translateY(-3px);
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Floating Stars */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            z-index: -1;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 2rem;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .section-title h3 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .filter-buttons {
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 6px 15px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Nebula Creations</h1>
+                <p>Digital Art Portfolio</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Explore the Cosmos of Creativity</h2>
+            <p>Journey through a galaxy of digital artwork, where imagination knows no bounds and every pixel tells a story.</p>
+            <button class="cta-button">View Gallery</button>
+        </div>
+
+        <!-- Floating stars background elements -->
+        <div class="star" style="width: 2px; height: 2px; top: 20%; left: 15%; --duration: 5s;"></div>
+        <div class="star" style="width: 3px; height: 3px; top: 70%; left: 85%; --duration: 7s;"></div>
+        <div class="star" style="width: 1px; height: 1px; top: 40%; left: 55%; --duration: 3s;"></div>
+        <div class="star" style="width: 2px; height: 2px; top: 80%; left: 25%; --duration: 6s;"></div>
+        <div class="star" style="width: 1px; height: 1px; top: 30%; left: 75%; --duration: 4s;"></div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="section-title">
+                <h3>Celestial Collection</h3>
+                <p>Browse through my latest cosmic creations across various digital mediums.</p>
+            </div>
+
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="concept-art">Concept Art</button>
+                <button class="filter-btn" data-filter="digital-painting">Digital Painting</button>
+                <button class="filter-btn" data-filter="3d-art">3D Art</button>
+                <button class="filter-btn" data-filter="vector-art">Vector Art</button>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- Artwork 1 -->
+                <div class="artwork-card" data-category="concept-art">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/aa576de5-6cdb-4eed-aeb9-8709e2219337.png" alt="Sci-fi cityscape with floating platforms and neon lights against a starry sky" class="artwork-img">
+                    <div class="artwork-info">
+                        <h4 class="artwork-title">Neon Metropolis</h4>
+                        <span class="artwork-category">Concept Art</span>
+                        <p class="artwork-desc">A futuristic city where advanced civilization meets the cosmos.</p>
+                        <a href="#" class="view-btn" data-modal="modal-1">View Details</a>
+                    </div>
+                </div>
+
+                <!-- Artwork 2 -->
+                <div class="artwork-card" data-category="digital-painting">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bd754cd3-a959-411d-b475-4871d14335c4.png" alt="Galactic princess with flowing cosmic hair and starry gown floating in space" class="artwork-img">
+                    <div class="artwork-info">
+                        <h4 class="artwork-title">Stardust Sovereign</h4>
+                        <span class="artwork-category">Digital Painting</span>
+                        <p class="artwork-desc">A royal figure embodying the essence of the cosmos.</p>
+                        <a href="#" class="view-btn" data-modal="modal-2">View Details</a>
+                    </div>
+                </div>
+
+                <!-- Artwork 3 -->
+                <div class="artwork-card" data-category="3d-art">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/09b5e1f3-9623-4164-be88-57a3f426f131.png" alt="3D rendered alien planet with crystalline structures and glowing flora" class="artwork-img">
+                    <div class="artwork-info">
+                        <h4 class="artwork-title">Xenon World</h4>
+                        <span class="artwork-category">3D Art</span>
+                        <p class="artwork-desc">An extraterrestrial landscape with breathtaking formations.</p>
+                        <a href="#" class="view-btn" data-modal="modal-3">View Details</a>
+                    </div>
+                </div>
+
+                <!-- Artwork 4 -->
+                <div class="artwork-card" data-category="vector-art">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/52874a47-b7cc-4627-89d9-82fdc5c09376.png" alt="Minimalist geometric constellations forming a spaceship" class="artwork-img">
+                    <div class="artwork-info">
+                        <h4 class="artwork-title">Celestial Geometry</h4>
+                        <span class="artwork-category">Vector Art</span>
+                        <p class="artwork-desc">Clean lines and shapes merging into space exploration.</p>
+                        <a href="#" class="view-btn" data-modal="modal-4">View Details</a>
+                    </div>
+                </div>
+
+                <!-- Artwork 5 -->
+                <div class="artwork-card" data-category="concept-art">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a6daa152-fd53-4270-948d-270952007ba8.png" alt="Post-apocalyptic space station orbiting a dying planet" class="artwork-img">
+                    <div class="artwork-info">
+                        <h4 class="artwork-title">Last Orbit</h4>
+                        <span class="artwork-category">Concept Art</span>
+                        <p class="artwork-desc">Humanity's final outpost in a collapsing solar system.</p>
+                        <a href="#" class="view-btn" data-modal="modal-5">View Details</a>
+                    </div>
+                </div>
+
+                <!-- Artwork 6 -->
+                <div class="artwork-card" data-category="digital-painting">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3e1254c2-dab7-483c-84d6-549beeee5c3e.png" alt="Interstellar traveler in a biomechanical suit emerging from a wormhole" class="artwork-img">
+                    <div class="artwork-info">
+                        <h4 class="artwork-title">Beyond the Event Horizon</h4>
+                        <span class="artwork-category">Digital Painting</span>
+                        <p class="artwork-desc">A moment of crossing between dimensions.</p>
+                        <a href="#" class="view-btn" data-modal="modal-6">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artwork Modals -->
+    <!-- Modal 1 -->
+    <div class="modal" id="modal-1">
+        <div class="modal-content">
+            <div class="close-modal">&times;</div>
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cefecfd3-3cab-435e-be58-e644c58dc073.png" alt="Sci-fi cityscape with floating platforms and neon lights against a starry sky" class="modal-img">
+            <h3 class="modal-title">Neon Metropolis</h3>
+            <span class="modal-category">Concept Art</span>
+            <p class="modal-desc">This futuristic cityscape imagines a civilization that has mastered anti-gravity technology, building upward into the cosmos. Neon signs advertise interstellar travel agencies, and holographic advertisements flicker between the skyscrapers. The night sky is filled with traffic lanes of spacecraft moving between orbital habitats and the planet surface.</p>
+            <p class="modal-date">Created: February 2023</p>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="modal" id="modal-2">
+        <div class="modal-content">
+            <div class="close-modal">&times;</div>
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2ec5207c-d99d-4ba2-873f-5c94af06744c.png" alt="Galactic princess with flowing cosmic hair and starry gown floating in space" class="modal-img">
+            <h3 class="modal-title">Stardust Sovereign</h3>
+            <span class="modal-category">Digital Painting</span>
+            <p class="modal-desc">The Stardust Sovereign is a cosmic entity said to govern the birth and death of stars. Her flowing gown is woven from nebula filaments, and her hair contains entire galaxies. This piece was inspired by the concept of celestial beings existing in higher dimensions, appearing god-like to three-dimensional observers.</p>
+            <p class="modal-date">Created: November 2022</p>
+        </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div class="modal" id="modal-3">
+        <div class="modal-content">
+            <div class="close-modal">&times;</div>
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ced58d8f-0ee0-4f9b-82db-86f8ddba029a.png" alt="3D rendered alien planet with crystalline structures and glowing flora" class="modal-img">
+            <h3 class="modal-title">Xenon World</h3>
+            <span class="modal-category">3D Art</span>
+            <p class="modal-desc">Created using Blender and Substance Painter, this alien landscape features silicon-based lifeforms that form complex crystalline structures. The environment glows with bioluminescent flora that reacts to sound waves. The atmosphere refracts light differently from Earth, creating prismatic atmospheric effects.</p>
+            <p class="modal-date">Created: September 2023</p>
+        </div>
+    </div>
+
+    <!-- Modal 4 -->
+    <div class="modal" id="modal-4">
+        <div class="modal-content">
+            <div class="close-modal">&times;</div>
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d8e7470d-6eea-4f50-b32c-9b7c403c37c8.png" alt="Minimalist geometric constellations forming a spaceship" class="modal-img">
+            <h3 class="modal-title">Celestial Geometry</h3>
+            <span class="modal-category">Vector Art</span>
+            <p class="modal-desc">This vector artwork explores the intersection of technology and astronomy through clean geometric forms. The constellations rearrange themselves to depict a spacecraft traveling through the cosmos. Created entirely in Adobe Illustrator, this piece demonstrates how simplicity can evoke deep emotions about space exploration.</p>
+            <p class="modal-date">Created: May 2023</p>
+        </div>
+    </div>
+
+    <!-- Modal 5 -->
+    <div class="modal" id="modal-5">
+        <div class="modal-content">
+            <div class="close-modal">&times;</div>
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c0e60594-6808-4bda-8f6a-6a1c8f0eff15.png" alt="Post-apocalyptic space station orbiting a dying planet" class="modal-img">
+            <h3 class="modal-title">Last Orbit</h3>
+            <span class="modal-category">Concept Art</span>
+            <p class="modal-desc">This concept illustrates humanity's final space station orbiting a planet ravaged by climate catastrophe. The station's solar arrays are patched with scavenged parts, and escape pods have all been launched. The cracked planet below glows with radioactive storms, while distant starships flee the solar system forever.</p>
+            <p class="modal-date">Created: July 2023</p>
+        </div>
+    </div>
+
+    <!-- Modal 6 -->
+    <div class="modal" id="modal-6">
+        <div class="modal-content">
+            <div class="close-modal">&times;</div>
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fc39c698-81f7-4ff0-bf1f-0e067b90b247.png" alt="Interstellar traveler in a biomechanical suit emerging from a wormhole" class="modal-img">
+            <h3 class="modal-title">Beyond the Event Horizon</h3>
+            <span class="modal-category">Digital Painting</span>
+            <p class="modal-desc">This piece captures the moment an astronaut emerges from an experimental wormhole, their hybrid organic-synthetic suit adapting to extreme dimensional forces. The swirling energies suggest alternate physics at play beyond our universe's event horizon. The astronaut's face reveals awe and terror at witnessing realities beyond human comprehension.</p>
+            <p class="modal-date">Created: April 2023</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" class="social-link">ArtStation</a>
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">Behance</a>
+                <a href="#" class="social-link">Twitter</a>
+                <a href="#" class="social-link">DeviantArt</a>
+            </div>
+            <p>© 2023 Nebula Creations. All artworks are property of their respective creator.</p>
+            <p>Powered by cosmic inspiration and digital passion.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Gallery Filter Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const artworkCards = document.querySelectorAll('.artwork-card');
+            
+            // Filter artworks based on category
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const filter = button.getAttribute('data-filter');
+                    
+                    // Filter artwork cards
+                    artworkCards.forEach(card => {
+                        const category = card.getAttribute('data-category');
+                        
+                        if (filter === 'all' || filter === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Modal Functionality
+            const modalButtons = document.querySelectorAll('.view-btn');
+            const modals = document.querySelectorAll('.modal');
+            const closeButtons = document.querySelectorAll('.close-modal');
+            
+            modalButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const modalId = button.getAttribute('data-modal');
+                    document.getElementById(modalId).classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            closeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    modals.forEach(modal => modal.classList.remove('active'));
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Close modal when clicking outside content
+            modals.forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            });
+            
+            // Create additional floating stars
+            function createStars() {
+                const starsContainer = document.querySelector('.hero');
+                const starsCount = 30;
+                
+                for (let i = 0; i < starsCount; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    
+                    // Random properties for each star
+                    const size = Math.random() * 3;
+                    const top = Math.random() * 100;
+                    const left = Math.random() * 100;
+                    const duration = 3 + Math.random() * 4;
+                    
+                    star.style.width = `${size}px`;
+                    star.style.height = `${size}px`;
+                    star.style.top = `${top}%`;
+                    star.style.left = `${left}%`;
+                    star.style.setProperty('--duration', `${duration}s`);
+                    
+                    starsContainer.appendChild(star);
+                }
+            }
+            
+            createStars();
+            
+            // Smooth scroll for CTA button
+            const ctaButton = document.querySelector('.cta-button');
+            ctaButton.addEventListener('click', () => {
+                document.querySelector('.gallery-section').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
